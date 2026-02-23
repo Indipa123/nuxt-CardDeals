@@ -23,7 +23,7 @@ const isActive = (path: string) => route.path === path
               </svg>
             </div>
             <div>
-              <h1 class="font-bold text-lg text-gray-900">CardDeals.lk</h1>
+              <h1 class="font-bold text-lg text-gray-900">CardDeals</h1>
               <p class="text-xs text-gray-500 hidden sm:block">Sri Lanka Card Offers</p>
             </div>
           </div>

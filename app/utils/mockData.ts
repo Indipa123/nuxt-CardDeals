@@ -7,7 +7,7 @@ export const CATEGORIES = [
     icon: Smartphone,
     count: 42,
     color: 'bg-indigo-500',
-    image: 'https://images.unsplash.com/photo-1550009158-9effb6e9bbba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080'
+    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'
   },
   {
     id: 'fashion',
@@ -221,7 +221,7 @@ export const MOCK_OFFERS = [
   {
     id: '2',
     brand: 'Cinnamon Hotels',
-    brandLogo: 'https://images.unsplash.com/photo-1695686017650-f2a8d6a498ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMHJlc29ydHxlbnwxfHx8fDE3Njk2MDU5NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    brandLogo: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     bank: 'Commercial Bank',
     bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     discount: '25% OFF',
@@ -889,7 +889,7 @@ export const MOCK_OFFERS = [
       }
     ]
   }
-  ,{
+  , {
     id: '8',
     brand: 'Odel',
     brandLogo: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',

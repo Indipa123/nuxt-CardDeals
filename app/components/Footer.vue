@@ -21,7 +21,7 @@ const categories = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
             </div>
-            <h3 class="font-bold text-white text-lg">CardDeals.lk</h3>
+            <h3 class="font-bold text-white text-lg">CardDeals</h3>
           </div>
           <p class="text-sm text-gray-400 mb-4">
             Sri Lanka's #1 platform for finding the best credit and debit card offers from all major banks.
@@ -95,7 +95,7 @@ const categories = [
       <div class="border-t border-gray-800 mt-8 pt-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <p class="text-sm text-gray-500 text-center md:text-left">
-            &copy; 2026 CardDeals.lk. All rights reserved.
+            &copy; 2026 CardDeals. All rights reserved.
           </p>
           <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
             <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
