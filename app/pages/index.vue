@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Filter, Percent, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { CATEGORIES, MOCK_OFFERS } from '~/utils/mockData'
 import localBanner1 from '~/assets/img/Gemini_Generated_Image_b9dmz7b9dmz7b9dm.png'
@@ -66,21 +66,29 @@ const allHighestOffers = computed(() => {
 })
 
 const offersPerSlide = 3
-const totalSlides = computed(() => Math.ceil(allHighestOffers.value.length / offersPerSlide))
+const totalSlides = computed(() => Math.max(1, Math.ceil(allHighestOffers.value.length / offersPerSlide)))
+
+watch(totalSlides, (newTotal) => {
+  if (currentHighestOffersSlide.value >= newTotal) {
+    currentHighestOffersSlide.value = Math.max(0, newTotal - 1)
+  }
+})
 
 const highestOffers = computed(() => {
+  const safeSlideIndex = Math.min(currentHighestOffersSlide.value, Math.max(0, totalSlides.value - 1))
+  
   return allHighestOffers.value.slice(
-    currentHighestOffersSlide.value * offersPerSlide,
-    (currentHighestOffersSlide.value + 1) * offersPerSlide
+    safeSlideIndex * offersPerSlide,
+    (safeSlideIndex + 1) * offersPerSlide
   )
 })
 
 const bannerSlides = [
-  { title: 'Mega Flash Sale', subtitle: 'Save up to 50% on fashion, electronics & more', description: 'Limited time offer • Valid until Feb 28', image: localBanner1 },
-  { title: 'Dine & Save Every Weekend', subtitle: 'Exclusive discounts at premium restaurants', description: 'Buy 1 Get 1 Free • 30% cashback offers', image: localBanner2 },
-  { title: 'Barista Specials', subtitle: 'Coffee & cafe deals', description: 'Discounts on coffee and bakery items', image: bannerBarista },
-  { title: 'Cinnamon Market', subtitle: 'Spices & gourmet foods', description: 'Special offers on gourmet products', image: bannerCinnamon },
-  { title: 'Scope Collection', subtitle: 'Handpicked collections', description: 'Curated products with exclusive savings', image: bannerScope }
+  { title: 'Mega Flash Sale', subtitle: 'Save up to 30% on fashion, electronics & more', description: 'Limited time offer • Valid until Feb 28', image: localBanner1, discountLabel: '30% OFF' },
+  { title: 'Dine & Save Every Weekend', subtitle: 'Exclusive discounts at premium restaurants', description: 'Buy 1 Get 1 Free • 30% cashback offers', image: localBanner2, discountLabel: '30% OFF' },
+  { title: 'Barista Specials', subtitle: 'Coffee & cafe deals', description: 'Discounts on coffee and bakery items', image: bannerBarista, discountLabel: 'Buy 1 Get 1' },
+  { title: 'Cinnamon Market', subtitle: 'Spices & gourmet foods', description: 'Special offers on gourmet products', image: bannerCinnamon, discountLabel: '20% OFF' },
+  { title: 'Scope Collection', subtitle: 'Handpicked collections', description: 'Curated products with exclusive savings', image: bannerScope, discountLabel: '10% OFF' }
 ]
 
 const midBannerSlides = [
@@ -182,23 +190,25 @@ onUnmounted(() => {
 })
 
 const banksOffered = [
-  { id: 'hnb', name: 'HNB' },
-  { id: 'commercialbank', name: 'Commercial Bank' },
-  { id: 'sampathbank', name: 'Sampath Bank' },
-  { id: 'ndbbank', name: 'NDB Bank' },
   { id: 'boc', name: 'Bank of Ceylon' },
-  { id: 'seylanbank', name: 'Seylan Bank' },
-  { id: "people'sbank", name: "People's Bank" }
+  { id: 'commercialbank', name: 'Commercial Bank' },
+  { id: 'hnb', name: 'HNB' },
+  { id: 'ndbbank', name: 'NDB Bank' },
+  { id: 'ntb', name: 'NTB Bank' },
+  { id: "people'sbank", name: "People's Bank" },
+  { id: 'sampathbank', name: 'Sampath Bank' },
+  { id: 'seylanbank', name: 'Seylan Bank' }
 ]
 
 const categoriesOffered = [
-  { id: 'shopping', name: 'Shopping', icon: '🛍️' },
   { id: 'dining', name: 'Dining', icon: '🍽️' },
-  { id: 'travel', name: 'Travel', icon: '✈️' },
-  { id: 'hotels', name: 'Hotels', icon: '🏨' },
   { id: 'education', name: 'Education', icon: '📚' },
+  { id: 'electronics', name: 'Electronics', icon: '📱' },
+  { id: 'healthcare', name: 'Healthcare', icon: '🏥' },
+  { id: 'hotels', name: 'Hotels', icon: '🏨' },
+  { id: 'fashion', name: 'Fashion', icon: '🛍️' },
   { id: 'supermarket', name: 'Supermarket', icon: '🛒' },
-  { id: 'healthcare', name: 'Healthcare', icon: '🏥' }
+  { id: 'travel', name: 'Travel', icon: '✈️' }
 ]
 
 const cardTypesOffered = [
@@ -207,11 +217,11 @@ const cardTypesOffered = [
 ]
 
 const districtsOffered = [
-  'Colombo', 'Gampaha', 'Kalutara', 'Kandy', 'Matale', 'Nuwara Eliya',
-  'Galle', 'Matara', 'Hambantota', 'Jaffna', 'Kilinochchi', 'Mannar',
-  'Vavuniya', 'Mullaitivu', 'Batticaloa', 'Ampara', 'Trincomalee',
-  'Kurunegala', 'Puttalam', 'Anuradhapura', 'Polonnaruwa', 'Badulla',
-  'Monaragala', 'Ratnapura', 'Kegalle'
+  'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle',
+  'Gampaha', 'Hambantota', 'Jaffna', 'Kalutara', 'Kandy', 'Kegalle',
+  'Kilinochchi', 'Kurunegala', 'Mannar', 'Matale', 'Matara', 'Monaragala',
+  'Mullaitivu', 'Nuwara Eliya', 'Polonnaruwa', 'Puttalam', 'Ratnapura',
+  'Trincomalee', 'Vavuniya'
 ]
 </script>
 
@@ -230,6 +240,12 @@ const districtsOffered = [
             :alt="slide.title"
             class="absolute inset-0 w-full h-full object-cover"
           />
+          <div
+            v-if="slide.discountLabel"
+            class="absolute top-4 right-4 sm:top-6 sm:right-6 bg-red-600 text-white font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg text-sm sm:text-base border-2 border-white/20 backdrop-blur-sm shadow-red-600/30 transform rotate-3 z-10"
+          >
+            {{ slide.discountLabel }}
+          </div>
         </div>
 
         <button
@@ -418,7 +434,7 @@ const districtsOffered = [
       <main class="flex-1 min-w-0 flex flex-col gap-8 sm:gap-12 mb-8 sm:mb-12">
         
         <!-- Categories Section -->
-        <section>
+        <section v-if="!hasActiveFilters && !searchQuery.trim()">
           <div class="flex items-center justify-between mb-4 sm:mb-6">
             <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Browse by Category</h2>
             <NuxtLink to="/categories" class="text-sm sm:text-base text-blue-600 hover:text-blue-700 font-medium">
@@ -506,8 +522,15 @@ const districtsOffered = [
             </NuxtLink>
           </div>
 
-          <div v-if="filteredOffers.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-            <OfferCard v-for="offer in filteredOffers" :key="offer.id" v-bind="offer" />
+          <div v-if="filteredOffers.length > 0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+              <OfferCard v-for="offer in filteredOffers.slice(0, 9)" :key="offer.id" v-bind="offer" />
+            </div>
+            <div class="mt-8 text-center" v-if="filteredOffers.length > 9">
+              <NuxtLink to="/offers" class="inline-block border border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
+                View All {{ filteredOffers.length }} Offers
+              </NuxtLink>
+            </div>
           </div>
           <div v-else class="text-center py-12 bg-white rounded-xl shadow-md">
             <div class="text-gray-400 mb-4">

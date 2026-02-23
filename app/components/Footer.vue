@@ -2,7 +2,7 @@
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-vue-next'
 
 const categories = [
-  { id: 'shopping', name: 'Shopping' },
+  { id: 'fashion', name: 'Fashion' },
   { id: 'dining', name: 'Dining' },
   { id: 'travel', name: 'Travel' },
   { id: 'healthcare', name: 'Healthcare' }

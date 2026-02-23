@@ -313,7 +313,7 @@ const getTabTitle = () => {
             <div class="bg-white rounded-xl shadow-md p-6">
               <h3 class="text-lg font-bold text-gray-900 mb-6">Popular Categories</h3>
               <div class="space-y-4">
-                <div v-for="(category, index) in [{ name: 'Dining', clicks: 45231, percentage: 35 }, { name: 'Shopping', clicks: 38542, percentage: 30 }, { name: 'Supermarket', clicks: 25487, percentage: 20 }, { name: 'Travel', clicks: 19234, percentage: 15 }]" :key="index">
+                <div v-for="(category, index) in [{ name: 'Dining', clicks: 45231, percentage: 35 }, { name: 'Fashion', clicks: 38542, percentage: 30 }, { name: 'Supermarket', clicks: 25487, percentage: 20 }, { name: 'Travel', clicks: 19234, percentage: 15 }]" :key="index">
                   <div class="flex items-center justify-between mb-2">
                     <span class="font-medium text-gray-900">{{ category.name }}</span>
                     <span class="text-sm text-gray-600">{{ category.clicks.toLocaleString() }} clicks</span>

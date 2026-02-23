@@ -6,14 +6,14 @@ const cashOffers = [
     id: 1,
     bank: 'HNB',
     bankLogo: '🏦',
-    title: 'Up to 5% Cashback on Online Shopping',
+    title: 'Up to 5% Cashback on Fashion & Apparel',
     description: 'Get instant cashback on all online purchases made with HNB Credit Cards',
     cashback: '5%',
     maxCashback: 'LKR 5,000',
     cardType: 'Credit Card',
     validUntil: '31 Dec 2026',
     terms: 'Minimum transaction LKR 10,000. Valid for Visa & Mastercard only.',
-    category: 'shopping',
+    category: 'fashion',
     bgColor: 'from-blue-50 to-blue-100'
   },
   {
@@ -83,7 +83,7 @@ const cashOffers = [
     cardType: 'Credit Card',
     validUntil: '15 Apr 2026',
     terms: 'Valid at Cotton Collection, Odel, and Fashion Bug outlets. Minimum purchase LKR 15,000.',
-    category: 'shopping',
+    category: 'fashion',
     bgColor: 'from-pink-50 to-pink-100'
   },
   {

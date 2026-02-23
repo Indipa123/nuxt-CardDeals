@@ -9,8 +9,9 @@ const selectedCardTypes = ref<string[]>([])
 const selectedDistricts = ref<string[]>([])
 const sortBy = ref<'discount' | 'latest' | 'popular'>('discount')
 
-const getDiscountValue = (discount: string) => {
-  const match = discount.match(/(\d+)%/)
+const getDiscountValue = (discount?: string) => {
+  if (!discount) return 0;
+  const match = (discount as string).match(/(\d+)%/)
   return match ? parseInt(match[1]) : 0
 }
 
@@ -66,23 +67,25 @@ const hasActiveFilters = computed(() => {
 })
 
 const banksOffered = [
-  { id: 'hnb', name: 'HNB' },
-  { id: 'commercialbank', name: 'Commercial Bank' },
-  { id: 'sampathbank', name: 'Sampath Bank' },
-  { id: 'ndbbank', name: 'NDB Bank' },
   { id: 'boc', name: 'Bank of Ceylon' },
-  { id: 'seylanbank', name: 'Seylan Bank' },
-  { id: "people'sbank", name: "People's Bank" }
+  { id: 'commercialbank', name: 'Commercial Bank' },
+  { id: 'hnb', name: 'HNB' },
+  { id: 'ndbbank', name: 'NDB Bank' },
+  { id: 'ntb', name: 'NTB Bank' },
+  { id: "people'sbank", name: "People's Bank" },
+  { id: 'sampathbank', name: 'Sampath Bank' },
+  { id: 'seylanbank', name: 'Seylan Bank' }
 ]
 
 const categoriesOffered = [
-  { id: 'shopping', name: 'Shopping', icon: '🛍️' },
   { id: 'dining', name: 'Dining', icon: '🍽️' },
-  { id: 'travel', name: 'Travel', icon: '✈️' },
-  { id: 'hotels', name: 'Hotels', icon: '🏨' },
   { id: 'education', name: 'Education', icon: '📚' },
+  { id: 'electronics', name: 'Electronics', icon: '📱' },
+  { id: 'fashion', name: 'Fashion', icon: '🛍️' },
+  { id: 'healthcare', name: 'Healthcare', icon: '🏥' },
+  { id: 'hotels', name: 'Hotels', icon: '🏨' },
   { id: 'supermarket', name: 'Supermarket', icon: '🛒' },
-  { id: 'healthcare', name: 'Healthcare', icon: '🏥' }
+  { id: 'travel', name: 'Travel', icon: '✈️' }
 ]
 
 const cardTypesOffered = [
