@@ -63,7 +63,7 @@ const groupedBankOffers = computed(() => {
       startDate,
       endDate,
     }
-  })
+  }).sort((a: any, b: any) => a.bank.localeCompare(b.bank))
 })
 
 const handleShare = (platform: string) => {
@@ -122,51 +122,51 @@ const formatDate = (date: Date) => {
             <!-- Banner 1 - Standard -->
             <div :class="['absolute inset-0 transition-opacity duration-700', currentMainBanner === 0 ? 'opacity-100' : 'opacity-0']">
               <img
-                :src="offer.brandLogo"
+                :src="(offer as any).mainBanners ? (offer as any).mainBanners[0] : offer.brandLogo"
                 :alt="offer.brand"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
-                <span class="inline-block px-3 py-1 bg-blue-500 text-white text-xs sm:text-sm font-medium rounded-full mb-2 sm:mb-3">
+                <span class="inline-block px-3 py-1 bg-blue-500 text-white text-xs sm:text-sm font-medium rounded-full mb-2 sm:mb-3 shadow-sm">
                   {{ offer.category }}
                 </span>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{{ offer.brand }}</h1>
-                <p class="text-white/90 text-sm sm:text-base md:text-lg max-w-2xl">{{ offer.location }}</p>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-md">{{ offer.brand }}</h1>
+                <p class="text-white/95 text-sm sm:text-base md:text-lg max-w-2xl drop-shadow-md">{{ offer.location }}</p>
               </div>
             </div>
 
             <!-- Banner 2 - Special Offer Highlight -->
             <div :class="['absolute inset-0 transition-opacity duration-700', currentMainBanner === 1 ? 'opacity-100' : 'opacity-0']">
               <img
-                :src="offer.brandLogo"
+                :src="(offer as any).mainBanners ? (offer as any).mainBanners[0] : offer.brandLogo"
                 :alt="offer.brand"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-purple-900/80 via-purple-800/40 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-purple-900/80 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
-                <div class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block mb-2 sm:mb-3">
+                <div class="bg-white/20 backdrop-blur-sm shadow-sm px-3 py-1.5 rounded-full inline-block mb-2 sm:mb-3">
                   <span class="text-white text-xs sm:text-sm font-bold">🎉 Special Offer</span>
                 </div>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{{ offer.brand }}</h1>
-                <p class="text-white/90 text-sm sm:text-base md:text-lg max-w-2xl">Multiple banks, Multiple benefits • {{ offer.location }}</p>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-md">{{ offer.brand }}</h1>
+                <p class="text-white/95 text-sm sm:text-base md:text-lg max-w-2xl drop-shadow-md">Multiple banks, Multiple benefits • {{ offer.location }}</p>
               </div>
             </div>
 
             <!-- Banner 3 - Limited Time -->
             <div :class="['absolute inset-0 transition-opacity duration-700', currentMainBanner === 2 ? 'opacity-100' : 'opacity-0']">
               <img
-                :src="offer.brandLogo"
+                :src="(offer as any).mainBanners ? (offer as any).mainBanners[0] : offer.brandLogo"
                 :alt="offer.brand"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-800/40 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-green-900/80 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
-                <span class="inline-block px-3 py-1 bg-red-500 text-white text-xs sm:text-sm font-bold rounded-full mb-2 sm:mb-3 animate-pulse">
+                <span class="inline-block px-3 py-1 bg-red-500 text-white shadow-sm text-xs sm:text-sm font-bold rounded-full mb-2 sm:mb-3 animate-pulse">
                   ⏰ Limited Time Offers
                 </span>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">Visit {{ offer.brand }} Today!</h1>
-                <p class="text-white/90 text-sm sm:text-base md:text-lg max-w-2xl">{{ offer.category }} • {{ offer.location }}</p>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-md">Visit {{ offer.brand }} Today!</h1>
+                <p class="text-white/95 text-sm sm:text-base md:text-lg max-w-2xl drop-shadow-md">{{ offer.category }} • {{ offer.location }}</p>
               </div>
             </div>
 
@@ -353,68 +353,65 @@ const formatDate = (date: Date) => {
           <div class="lg:col-span-1">
             <div class="space-y-4 lg:sticky lg:top-24">
               <!-- Vertical Company Banner 1 -->
-              <div class="bg-gradient-to-b from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="relative h-64 sm:h-72">
+              <div class="bg-gradient-to-b from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+                <div class="h-56 sm:h-64 relative">
                   <img
-                    :src="offer.brandLogo"
+                    :src="(offer as any).verticalBanners ? (offer as any).verticalBanners[0] : offer.brandLogo"
                     :alt="offer.brand"
                     class="w-full h-full object-cover"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                </div>
 
-                  <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                    <h3 class="text-xl font-bold text-white mb-2">{{ offer.brand }}</h3>
-                    <p class="text-white/90 text-sm mb-4">Experience exclusive benefits</p>
-                    <div class="space-y-2">
-                      <div class="flex items-center gap-2 text-white/90 text-sm">
-                        <span>📍</span>
-                        <span>{{ offer.location }}</span>
-                      </div>
-                      <div class="flex items-center gap-2 text-white/90 text-sm">
-                        <span>🏷️</span>
-                        <span>{{ offer.category }}</span>
-                      </div>
+                <div class="p-4 sm:p-6 flex-1">
+                  <h3 class="text-xl font-bold text-white mb-2">{{ offer.brand }}</h3>
+                  <p class="text-white/90 text-sm mb-4">Experience exclusive benefits</p>
+                  <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-white/90 text-sm">
+                      <span>📍</span>
+                      <span>{{ offer.location }}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-white/90 text-sm">
+                      <span>🏷️</span>
+                      <span>{{ offer.category }}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- Vertical Company Banner 2 -->
-              <div class="bg-gradient-to-b from-purple-600 via-purple-700 to-purple-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="relative h-64 sm:h-72">
+              <div class="bg-gradient-to-b from-purple-600 via-purple-700 to-purple-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+                <div class="h-56 sm:h-64 relative">
                   <img
-                    :src="offer.brandLogo"
+                    :src="(offer as any).verticalBanners ? (offer as any).verticalBanners[1] : offer.brandLogo"
                     :alt="offer.brand"
-                    class="w-full h-full object-cover opacity-90"
+                    class="w-full h-full object-cover"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-800/50 to-transparent"></div>
+                </div>
 
-                  <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                    <div class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full inline-block mb-3">
-                      <span class="text-white text-xs font-semibold">Special Offer</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Save More at {{ offer.brand }}</h3>
-                    <p class="text-white/90 text-sm">Multiple banks, multiple benefits</p>
+                <div class="p-4 sm:p-6 flex-1">
+                  <div class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full inline-block mb-3">
+                    <span class="text-white text-xs font-semibold">Special Offer</span>
                   </div>
+                  <h3 class="text-xl font-bold text-white mb-2">Save More at {{ offer.brand }}</h3>
+                  <p class="text-white/90 text-sm">Multiple banks, multiple benefits</p>
                 </div>
               </div>
 
               <!-- Vertical Company Banner 3 -->
-              <div class="bg-gradient-to-b from-green-600 via-green-700 to-green-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="relative h-64 sm:h-72">
+              <div class="bg-gradient-to-b from-green-600 via-green-700 to-green-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+                <div class="h-56 sm:h-64 relative">
                   <img
-                    :src="offer.brandLogo"
+                    :src="(offer as any).verticalBanners ? (offer as any).verticalBanners[2] : offer.brandLogo"
                     :alt="offer.brand"
-                    class="w-full h-full object-cover opacity-80"
+                    class="w-full h-full object-cover"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-green-900/90 via-green-800/40 to-transparent"></div>
+                </div>
 
-                  <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                    <h3 class="text-2xl font-bold text-white mb-3">Visit Us Today!</h3>
-                    <p class="text-white/90 text-sm mb-4">Discover amazing deals with your favorite bank cards</p>
-                    <div class="inline-block bg-white text-green-800 px-4 py-2 rounded-lg font-bold text-sm">
-                      🎉 Limited Time Offers
-                    </div>
+                <div class="p-4 sm:p-6 flex-1">
+                  <h3 class="text-2xl font-bold text-white mb-3">Visit Us Today!</h3>
+                  <p class="text-white/90 text-sm mb-4">Discover amazing deals with your favorite bank cards</p>
+                  <div class="inline-block bg-white text-green-800 px-4 py-2 rounded-lg font-bold text-sm">
+                    🎉 Limited Time Offers
                   </div>
                 </div>
               </div>

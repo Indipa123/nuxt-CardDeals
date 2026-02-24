@@ -71,7 +71,13 @@ export const MOCK_OFFERS = [
   {
     id: '1',
     brand: 'Fashion Bug',
-    brandLogo: 'https://images.unsplash.com/photo-1757085231450-41e56920ca84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwc3RvcmUlMjBjbG90aGluZ3xlbnwxfHx8fDE3Njk2MzQ5OTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    brandLogo: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    mainBanners: ['https://images.unsplash.com/photo-1479064555552-3ef4979f8908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920'],
+    verticalBanners: [
+      'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800'
+    ],
     bank: 'HNB',
     bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     discount: '30% OFF',
@@ -635,11 +641,17 @@ export const MOCK_OFFERS = [
   {
     id: '7',
     brand: 'Nolimit',
-    brandLogo: 'https://images.unsplash.com/photo-1770226415002-dbbd40327ec7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwY2xvdGhpbmclMjBzdG9yZSUyMG1vZGVybnxlbnwxfHx8fDE3NzEyMDkyMTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    brandLogo: 'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    mainBanners: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920'],
+    verticalBanners: [
+      'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800'
+    ],
     bank: 'HNB',
     bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     discount: '40% OFF',
-    category: 'Electronics',
+    category: 'Fashion',
     expiryDate: 'Mar 31',
     location: 'All Island',
     website: 'https://www.nolimit.lk/',
@@ -893,6 +905,12 @@ export const MOCK_OFFERS = [
     id: '8',
     brand: 'Odel',
     brandLogo: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    mainBanners: ['https://images.unsplash.com/photo-1445205170230-053b83016050?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920'],
+    verticalBanners: [
+      'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800'
+    ],
     bank: 'Commercial Bank',
     bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     discount: '25% OFF',
@@ -903,12 +921,30 @@ export const MOCK_OFFERS = [
     districts: ['Colombo', 'Kandy', 'Galle'],
     description: 'Get 25% off on the latest fashion trends at Odel outlets across Sri Lanka with your Commercial Bank Card.',
     terms: ['Valid for Commercial Bank Cards', 'Not valid on sale items'],
-    bankOffers: []
+    bankOffers: [
+      {
+        bank: 'Commercial Bank',
+        bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+        cardType: 'Credit',
+        discount: '25% OFF',
+        appliesTo: 'Both',
+        startDate: '2026-02-01',
+        endDate: '2026-04-30',
+        description: 'Get 25% off on the latest fashion trends at Odel outlets across Sri Lanka with your Commercial Bank Card.',
+        terms: ['Valid for Commercial Bank Cards', 'Not valid on sale items']
+      }
+    ]
   },
   {
     id: '9',
     brand: 'Kelly Felder',
-    brandLogo: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    brandLogo: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    mainBanners: ['https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920'],
+    verticalBanners: [
+      'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800',
+      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800'
+    ],
     bank: 'HNB',
     bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     discount: '20% OFF',
@@ -919,7 +955,19 @@ export const MOCK_OFFERS = [
     districts: ['Colombo'],
     description: 'Elevate your style with Kelly Felder! 20% savings when you pay with your HNB Credit Card.',
     terms: ['Valid for HNB Credit Cards', 'Minimum spend LKR 5000'],
-    bankOffers: []
+    bankOffers: [
+      {
+        bank: 'HNB',
+        bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+        cardType: 'Credit',
+        discount: '20% OFF',
+        appliesTo: 'Both',
+        startDate: '2026-02-01',
+        endDate: '2026-05-15',
+        description: 'Elevate your style with Kelly Felder! 20% savings when you pay with your HNB Credit Card.',
+        terms: ['Valid for HNB Credit Cards', 'Minimum spend LKR 5000']
+      }
+    ]
   },
   {
     id: '10',
@@ -935,7 +983,19 @@ export const MOCK_OFFERS = [
     districts: ['Colombo', 'Galle', 'Kandy', 'Nuwara Eliya', 'Hambantota'],
     description: 'Explore Sri Lanka with Jetwing Hotels and get 30% OFF your staycation using NTB Bank Cards.',
     terms: ['Valid for NTB Cards', 'Subject to availability'],
-    bankOffers: []
+    bankOffers: [
+      {
+        bank: 'NTB Bank',
+        bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+        cardType: 'Credit',
+        discount: '30% OFF',
+        appliesTo: 'Online Store',
+        startDate: '2026-02-01',
+        endDate: '2026-06-30',
+        description: 'Explore Sri Lanka with Jetwing Hotels and get 30% OFF your staycation using NTB Bank Cards.',
+        terms: ['Valid for NTB Cards', 'Subject to availability']
+      }
+    ]
   }
 ];
 
