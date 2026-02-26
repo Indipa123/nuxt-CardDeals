@@ -86,15 +86,17 @@ const highestOffers = computed(() => {
 const bannerSlides = [
   { title: 'Mega Flash Sale', subtitle: 'Save up to 30% on fashion, electronics & more', description: 'Limited time offer • Valid until Feb 28', image: localBanner1, discountLabel: '30% OFF' },
   { title: 'Dine & Save Every Weekend', subtitle: 'Exclusive discounts at premium restaurants', description: 'Buy 1 Get 1 Free • 30% cashback offers', image: localBanner2, discountLabel: '30% OFF' },
-  { title: 'Barista Specials', subtitle: 'Coffee & cafe deals', description: 'Discounts on coffee and bakery items', image: bannerBarista, discountLabel: 'Buy 1 Get 1' },
+  { title: 'Barista Specials', subtitle: 'Coffee & cafe deals', description: 'Discounts on coffee and bakery items', image: bannerBarista, discountLabel: '30% OFF' },
   { title: 'Cinnamon Market', subtitle: 'Spices & gourmet foods', description: 'Special offers on gourmet products', image: bannerCinnamon, discountLabel: '20% OFF' },
   { title: 'Scope Collection', subtitle: 'Handpicked collections', description: 'Curated products with exclusive savings', image: bannerScope, discountLabel: '10% OFF' }
 ]
 
 const midBannerSlides = [
-  { title: 'Exclusive Bank Deals', image: localBanner2 },
-  { title: 'Weekend Shopping Spree', image: localBanner1 },
-  { title: 'Tech Gadgets Sale', image: localBanner2 }
+  { title: 'Exclusive Bank Deals', image: localBanner1 },
+  { title: 'Weekend Shopping Spree', image: localBanner2 },
+  { title: 'Tech Gadgets Sale', image: bannerBarista },
+  { title: 'Summer Getaways', image: bannerCinnamon },
+  { title: 'Fine Dining Experiences', image: bannerScope }
 ]
 
 const handleBankToggle = (bankId: string) => {
