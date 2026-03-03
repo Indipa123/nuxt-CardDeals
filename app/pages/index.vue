@@ -7,6 +7,8 @@ import localBanner2 from '~/assets/img/Gemini_Generated_Image_arkc2garkc2garkc.p
 import bannerBarista from '~/assets/img/barista.png'
 import bannerCinnamon from '~/assets/img/cinnamon.png'
 import bannerScope from '~/assets/img/scope.png'
+import visaIcon from '~/assets/img/VISA icon.png'
+import mastercardIcon from '~/assets/img/mastercard.png'
 
 const selectedBanks = ref<string[]>([])
 const selectedCategories = ref<string[]>([])
@@ -214,8 +216,10 @@ const categoriesOffered = [
 ]
 
 const cardTypesOffered = [
-  { id: 'credit', name: 'Credit Card', icon: '💳' },
-  { id: 'debit', name: 'Debit Card', icon: '💳' }
+  { id: 'credit', name: 'Credit Card', icon: '💳', img: null },
+  { id: 'debit', name: 'Debit Card', icon: '💳', img: null },
+  { id: 'visa', name: 'VISA', icon: null, img: visaIcon },
+  { id: 'mastercard', name: 'MasterCard', icon: null, img: mastercardIcon }
 ]
 
 const districtsOffered = [
@@ -377,10 +381,26 @@ const districtsOffered = [
                     v-for="cardType in cardTypesOffered"
                     :key="cardType.id"
                     @click="toggleCardType(cardType.id)"
-                    :class="['px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5', selectedCardTypes.includes(cardType.id) ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200']"
+                    :class="[
+                      cardType.img ? 'px-3 py-2 rounded-lg transition-all flex items-center justify-center' : 'px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5',
+                      selectedCardTypes.includes(cardType.id)
+                        ? (cardType.img ? 'ring-2 ring-blue-500 ring-offset-1 bg-blue-50 shadow-sm' : 'bg-blue-600 text-white shadow-sm')
+                        : (cardType.img ? 'bg-gray-50 hover:bg-gray-100 border border-gray-200' : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200')
+                    ]"
+                    :title="cardType.name"
                   >
-                    <span class="text-sm">{{ cardType.icon }}</span>
-                    <span>{{ cardType.name }}</span>
+                    <!-- Image-based icon (VISA / Mastercard) -->
+                    <img
+                      v-if="cardType.img"
+                      :src="cardType.img"
+                      :alt="cardType.name"
+                      class="h-8 w-auto object-contain"
+                    />
+                    <!-- Text-based icon (Credit / Debit) -->
+                    <template v-else>
+                      <span class="text-sm">{{ cardType.icon }}</span>
+                      <span>{{ cardType.name }}</span>
+                    </template>
                   </button>
                 </div>
               </div>

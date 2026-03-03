@@ -3,6 +3,8 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ChevronRight, Share2, ExternalLink, CreditCard } from 'lucide-vue-next'
 import { MOCK_OFFERS } from '~/utils/mockData'
+import visaIcon from '~/assets/img/VISA icon.png'
+import mastercardIcon from '~/assets/img/mastercard.png'
 
 const route = useRoute()
 const offerId = route.params.id as string
@@ -208,6 +210,7 @@ const formatDate = (date: Date) => {
                       <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Bank</th>
                       <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Credit</th>
                       <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Debit</th>
+                      <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Card Network</th>
                       <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Applies To</th>
                       <th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Period</th>
                     </tr>
@@ -246,6 +249,27 @@ const formatDate = (date: Date) => {
                       </td>
 
                       <td class="px-3 py-2.5">
+                        <div class="flex flex-wrap gap-2 items-center">
+                          <template v-for="offerItem in bank.offers" :key="offerItem.cardType">
+                            <img
+                              v-if="offerItem.cardNetwork === 'VISA'"
+                              :src="visaIcon"
+                              alt="VISA"
+                              title="VISA"
+                              class="h-8 w-auto object-contain"
+                            />
+                            <img
+                              v-else-if="offerItem.cardNetwork === 'MasterCard'"
+                              :src="mastercardIcon"
+                              alt="Mastercard"
+                              title="Mastercard"
+                              class="h-8 w-auto object-contain"
+                            />
+                          </template>
+                        </div>
+                      </td>
+
+                      <td class="px-3 py-2.5">
                         <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
                           {{ bank.appliesTo }}
                         </span>
@@ -274,9 +298,23 @@ const formatDate = (date: Date) => {
                       <h3 class="text-lg font-bold text-gray-900">
                         {{ offerItem.bank }} – {{ offerItem.cardType }} Card
                       </h3>
-                      <p class="text-xs text-gray-600">
-                        {{ offerItem.discount }} OFF
-                      </p>
+                      <div class="flex items-center gap-2 mt-1">
+                        <p class="text-xs text-gray-600">{{ offerItem.discount }} OFF</p>
+                        <img
+                          v-if="offerItem.cardNetwork === 'VISA'"
+                          :src="visaIcon"
+                          alt="VISA"
+                          title="VISA"
+                          class="h-7 w-auto object-contain"
+                        />
+                        <img
+                          v-else-if="offerItem.cardNetwork === 'MasterCard'"
+                          :src="mastercardIcon"
+                          alt="Mastercard"
+                          title="Mastercard"
+                          class="h-7 w-auto object-contain"
+                        />
+                      </div>
                     </div>
                   </div>
 
