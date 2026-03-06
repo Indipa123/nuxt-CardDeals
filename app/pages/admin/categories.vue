@@ -240,18 +240,27 @@ function resetForm() {
 <style scoped>
 /* Toast */
 .toast {
-  position: fixed; top: 24px; right: 24px; z-index: 9999;
+  position: fixed; top: 16px; right: 16px; left: 16px; z-index: 9999;
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
+  padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
+@media (min-width: 480px) { .toast { left: auto; right: 24px; top: 24px; } }
 .toast.success { background: #10b981; color: white; }
 .toast.error { background: #ef4444; color: white; }
 .toast-enter-active, .toast-leave-active { transition: all 0.3s; }
 .toast-enter-from, .toast-leave-to { opacity: 0; transform: translateY(-12px); }
 
 /* Layout */
-.layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .layout { grid-template-columns: 1fr 340px; gap: 24px; }
+}
 
 /* Panes */
 .form-pane, .list-pane {
@@ -260,21 +269,24 @@ function resetForm() {
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .pane-header {
-  padding: 24px 28px; border-bottom: 1px solid #f1f5f9;
+  padding: 18px 20px; border-bottom: 1px solid #f1f5f9;
   background: #f8fafc;
   display: flex; justify-content: space-between; align-items: flex-start;
 }
+@media (min-width: 640px) { .pane-header { padding: 24px 28px; } }
 .pane-title { font-size: 16px; font-weight: 700; color: #0f172a; }
 .pane-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
 .count-badge { background: #eff6ff; color: #3b82f6; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
 .count-badge span { font-weight: 400; color: #93c5fd; }
 
-.form-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 24px; }
+.form-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 20px; }
+@media (min-width: 640px) { .form-body { padding: 24px 28px; gap: 24px; } }
 
 /* Blocks */
 .section-block { display: flex; flex-direction: column; gap: 12px; }
 .block-title { font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.07em; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 500px) { .form-row { grid-template-columns: 1fr 1fr; gap: 14px; } }
 .form-group { display: flex; flex-direction: column; gap: 5px; }
 .form-label { font-size: 12px; font-weight: 600; color: #475569; }
 .required { color: #ef4444; }
@@ -288,7 +300,9 @@ function resetForm() {
 .form-input:disabled { background: #f8fafc; color: #94a3b8; }
 
 /* Icons */
-.icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (min-width: 400px) { .icon-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) { .icon-grid { grid-template-columns: repeat(5, 1fr); } }
 .icon-btn {
   display: flex; flex-direction: column; align-items: center; gap: 4px;
   padding: 10px 6px; border-radius: 10px; border: 1.5px solid #e2e8f0;
@@ -341,8 +355,9 @@ function resetForm() {
 /* Footer */
 .form-footer {
   display: flex; justify-content: flex-end; gap: 12px;
-  padding: 20px 28px; border-top: 1px solid #f1f5f9; background: #f8fafc;
+  padding: 16px 20px; border-top: 1px solid #f1f5f9; background: #f8fafc;
 }
+@media (min-width: 640px) { .form-footer { padding: 20px 28px; } }
 .btn-ghost {
   padding: 10px 22px; border-radius: 10px; border: 1px solid #e2e8f0;
   background: white; color: #374151; font-size: 13px; font-weight: 600;

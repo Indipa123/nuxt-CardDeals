@@ -175,11 +175,12 @@ function saveMidBanners() {
 <style scoped>
 /* Toast */
 .toast {
-  position: fixed; top: 24px; right: 24px; z-index: 9999;
+  position: fixed; top: 16px; right: 16px; left: 16px; z-index: 9999;
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
+  padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
+@media (min-width: 480px) { .toast { left: auto; right: 24px; top: 24px; } }
 .toast.success { background: #10b981; color: white; }
 .toast.error { background: #ef4444; color: white; }
 .toast-enter-active, .toast-leave-active { transition: all 0.3s; }
@@ -188,15 +189,17 @@ function saveMidBanners() {
 /* Tabs */
 .tab-bar {
   display: flex; gap: 4px; background: white; padding: 6px;
-  border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05); width: fit-content;
+  border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  width: 100%; overflow-x: auto;
 }
 .tab-btn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer;
-  font-size: 13px; font-weight: 600; color: #64748b;
-  background: transparent; transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 14px; border-radius: 10px; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 600; color: #64748b;
+  background: transparent; transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
 }
+@media (min-width: 640px) { .tab-btn { padding: 10px 20px; font-size: 13px; gap: 8px; } }
 .tab-btn:hover { color: #374151; background: #f8fafc; }
 .tab-btn.active { background: #1e293b; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
@@ -245,8 +248,11 @@ function saveMidBanners() {
 
 /* Form */
 .form-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-  padding: 0 20px 20px;
+  display: grid; grid-template-columns: 1fr;
+  gap: 12px; padding: 0 16px 16px;
+}
+@media (min-width: 500px) {
+  .form-grid { grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 20px 20px; }
 }
 .form-group { display: flex; flex-direction: column; gap: 5px; }
 .form-group.half { grid-column: span 1; }

@@ -257,11 +257,17 @@ export const MOCK_OFFERS = [
         bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
         cardType: 'Credit',
         cardNetwork: 'VISA',
-        discount: '25%',
-        appliesTo: 'Online Store',
+        discount: 'Up to 25%',
+        appliesTo: 'Online Booking',
         startDate: '2026-02-01',
         endDate: '2026-03-15',
-        description: 'Enjoy 25% discount on room bookings at all Cinnamon Hotels across Sri Lanka with your Commercial Bank credit card.',
+        description: 'Enjoy discounts on room bookings at Cinnamon Hotels. Discount varies by room type.',
+        conditions: [
+          { label: 'Double Deluxe Room', discount: '25%' },
+          { label: 'Superior King Room', discount: '20%' },
+          { label: 'Standard Single Room', discount: '15%' },
+          { label: 'Suite', discount: '10%' }
+        ],
         terms: [
           'Valid for Commercial Bank Credit Cards',
           'Advance booking required',
@@ -274,11 +280,16 @@ export const MOCK_OFFERS = [
         bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
         cardType: 'Credit',
         cardNetwork: 'MasterCard',
-        discount: '20%',
-        appliesTo: 'Online Store',
+        discount: 'Up to 20%',
+        appliesTo: 'Online Booking',
         startDate: '2026-02-05',
         endDate: '2026-03-31',
-        description: '20% discount on hotel stays with HNB credit cards. Complimentary breakfast included.',
+        description: '20% discount on hotel stays with HNB credit cards. Discount varies by room type.',
+        conditions: [
+          { label: 'Family Suite (2 Adults + 2 Kids)', discount: '20%' },
+          { label: 'Double Bed Room', discount: '18%' },
+          { label: 'Single Bed Room', discount: '12%' }
+        ],
         terms: [
           'Valid for HNB Credit Cards only',
           'Minimum 2 nights stay required',
@@ -292,7 +303,7 @@ export const MOCK_OFFERS = [
         cardType: 'Debit',
         cardNetwork: 'VISA',
         discount: '15%',
-        appliesTo: 'Online Store',
+        appliesTo: 'Online Booking',
         startDate: '2026-02-01',
         endDate: '2026-04-30',
         description: 'Get 15% off with Seylan Bank debit cards. Valid for weekend bookings.',
@@ -330,11 +341,16 @@ export const MOCK_OFFERS = [
         bankLogo: 'https://images.unsplash.com/photo-1556742521-9713bf272865?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5rJTIwY3JlZGl0JTIwY2FyZCUyMHBheW1lbnR8ZW58MXx8fHwxNzY5NjU5NTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
         cardType: 'Credit',
         cardNetwork: 'MasterCard',
-        discount: '30%',
+        discount: 'Up to 30%',
         appliesTo: 'Physical Store',
         startDate: '2026-02-01',
         endDate: '2026-02-20',
-        description: 'Get 30% off your total bill when you pay with Sampath Bank credit cards.',
+        description: 'Discount on your bill with Sampath Bank credit card. Discount varies by buffet type.',
+        conditions: [
+          { label: 'Family Buffet (4 persons)', discount: '30%' },
+          { label: 'Couple Buffet (2 persons)', discount: '22%' },
+          { label: 'Individual', discount: '15%' }
+        ],
         terms: [
           'Valid for Sampath Bank Credit Cards',
           'Valid Monday to Friday',

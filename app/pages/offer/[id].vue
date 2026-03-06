@@ -57,6 +57,8 @@ const groupedBankOffers = computed(() => {
     const endDates = b.offers.map((x: any) => new Date(x.endDate).getTime())
     const startDate = startDates.length ? new Date(Math.min(...startDates)) : new Date()
     const endDate = endDates.length ? new Date(Math.max(...endDates)) : new Date()
+    // Collect conditions from all offers in this bank group
+    const allConditions = b.offers.flatMap((x: any) => x.conditions || [])
     return {
       ...b,
       credit,
@@ -64,6 +66,7 @@ const groupedBankOffers = computed(() => {
       appliesTo: appliesSet.length === 1 ? appliesSet[0] : 'Varies',
       startDate,
       endDate,
+      conditions: allConditions.length ? allConditions : null,
     }
   }).sort((a: any, b: any) => a.bank.localeCompare(b.bank))
 })
@@ -91,6 +94,20 @@ const formatDate = (date: Date) => {
     day: 'numeric',
     year: 'numeric',
   })
+}
+
+// Smart badge meta for "Applies To" values
+const appliesToMeta = (value: string): { icon: string; classes: string; label: string } => {
+  switch (value) {
+    case 'Physical Store':  return { icon: '🏪', label: 'Physical Store',  classes: 'bg-emerald-100 text-emerald-700 border border-emerald-200' }
+    case 'Online Store':    return { icon: '🛒', label: 'Online Store',    classes: 'bg-violet-100  text-violet-700  border border-violet-200'  }
+    case 'Online Booking':  return { icon: '💻', label: 'Online Booking',  classes: 'bg-indigo-100  text-indigo-700  border border-indigo-200'  }
+    case 'Dine In':         return { icon: '🍽️', label: 'Dine In',         classes: 'bg-orange-100  text-orange-700  border border-orange-200'  }
+    case 'Takeaway':        return { icon: '🥡', label: 'Takeaway',        classes: 'bg-yellow-100  text-yellow-700  border border-yellow-200'  }
+    case 'Both':            return { icon: '✅', label: 'Both',            classes: 'bg-blue-100    text-blue-700    border border-blue-200'    }
+    case 'Varies':          return { icon: '↔️', label: 'Varies',          classes: 'bg-gray-100    text-gray-600    border border-gray-200'    }
+    default:                return { icon: '📌', label: value,             classes: 'bg-blue-100    text-blue-700    border border-blue-200'    }
+  }
 }
 </script>
 
@@ -235,16 +252,30 @@ const formatDate = (date: Date) => {
                       </td>
 
                       <td class="px-3 py-2.5">
-                        <span v-if="bank.credit" class="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">
-                          {{ bank.credit.discount }}
-                        </span>
+                        <div v-if="bank.credit" class="flex items-center gap-1.5 flex-wrap">
+                          <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">
+                            {{ bank.credit.discount }}
+                          </span>
+                          <span
+                            v-if="bank.conditions"
+                            title="Special conditions apply — click row to view details"
+                            class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-amber-100 text-amber-600 text-xs font-bold rounded-full border border-amber-300 cursor-help"
+                          >⭐ Conditions</span>
+                        </div>
                         <span v-else class="text-gray-400 text-xs">—</span>
                       </td>
 
                       <td class="px-3 py-2.5">
-                        <span v-if="bank.debit" class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
-                          {{ bank.debit.discount }}
-                        </span>
+                        <div v-if="bank.debit" class="flex items-center gap-1.5 flex-wrap">
+                          <span class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
+                            {{ bank.debit.discount }}
+                          </span>
+                          <span
+                            v-if="bank.conditions"
+                            title="Special conditions apply — click row to view details"
+                            class="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-amber-100 text-amber-600 text-xs font-bold rounded-full border border-amber-300 cursor-help"
+                          >⭐ Conditions</span>
+                        </div>
                         <span v-else class="text-gray-400 text-xs">—</span>
                       </td>
 
@@ -270,8 +301,9 @@ const formatDate = (date: Date) => {
                       </td>
 
                       <td class="px-3 py-2.5">
-                        <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-                          {{ bank.appliesTo }}
+                        <span :class="['inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap', appliesToMeta(bank.appliesTo).classes]">
+                          <span>{{ appliesToMeta(bank.appliesTo).icon }}</span>
+                          {{ appliesToMeta(bank.appliesTo).label }}
                         </span>
                       </td>
 
@@ -321,6 +353,32 @@ const formatDate = (date: Date) => {
                   <div class="mb-3">
                     <h4 class="text-sm font-bold text-gray-900 mb-1">Offer Details</h4>
                     <p class="text-gray-700 text-sm">{{ offerItem.description }}</p>
+                  </div>
+
+                  <!-- ⭐ Conditions breakdown (room types / buffet types) -->
+                  <div v-if="offerItem.conditions && offerItem.conditions.length" class="mb-3">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="text-sm font-bold text-gray-900">Discount by Type</span>
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full border border-amber-300">⭐ Conditions Apply</span>
+                    </div>
+                    <div class="overflow-hidden rounded-lg border border-amber-200">
+                      <table class="w-full">
+                        <thead>
+                          <tr class="bg-amber-50">
+                            <th class="px-3 py-2 text-left text-xs font-semibold text-amber-800">Type / Category</th>
+                            <th class="px-3 py-2 text-right text-xs font-semibold text-amber-800">Discount</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-amber-100">
+                          <tr v-for="(cond, ci) in offerItem.conditions" :key="ci" class="hover:bg-amber-50 transition-colors">
+                            <td class="px-3 py-2 text-xs text-gray-800 font-medium">{{ cond.label }}</td>
+                            <td class="px-3 py-2 text-right">
+                              <span class="inline-block px-2 py-0.5 bg-amber-500 text-white text-xs font-bold rounded-full">{{ cond.discount }}</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
 
                   <div>
@@ -383,6 +441,7 @@ const formatDate = (date: Date) => {
             <div class="bg-blue-50 border border-blue-200 rounded-xl shadow-sm p-4">
               <p class="text-xs text-blue-800">
                 <strong>💡 Tip:</strong> Click on any bank row in the table to view detailed terms and conditions for that specific offer.
+                Rows marked with <strong>⭐ Conditions</strong> have special per-type discounts (e.g. room types or buffet types) — click to see the full breakdown.
               </p>
             </div>
           </div>

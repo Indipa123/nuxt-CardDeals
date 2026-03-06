@@ -12,7 +12,7 @@ const CATEGORIES = ['Fashion', 'Dining', 'Hotels', 'Electronics', 'Supermarket',
 const BANKS = ['BOC', 'Commercial Bank', 'HNB', 'NDB Bank', 'NTB Bank', "People's Bank", 'Sampath Bank', 'Seylan Bank']
 const CARD_TYPES = ['Credit', 'Debit']
 const CARD_NETWORKS = ['VISA', 'MasterCard', 'Both']
-const APPLIES_TO = ['Physical Store', 'Online Store', 'Both']
+const APPLIES_TO = ['Physical Store', 'Online Store', 'Online Booking', 'Dine In', 'Takeaway', 'Both']
 const SRI_LANKA_DISTRICTS = [
   'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle',
   'Gampaha', 'Hambantota', 'Jaffna', 'Kalutara', 'Kandy', 'Kegalle',
@@ -35,6 +35,7 @@ function emptyBankOffer() {
     endDate: '',
     description: '',
     terms: [''],
+    conditions: [] as { label: string; discount: string }[],
     bankLogoPreview: null as string | null,
     bankLogoFile: null as File | null,
   }
@@ -90,6 +91,10 @@ function addBankOffer() { form.value.bankOffers.push(emptyBankOffer()) }
 function removeBankOffer(i: number) {
   if (form.value.bankOffers.length > 1) form.value.bankOffers.splice(i, 1)
 }
+
+/* ─ Conditions management ─ */
+function addCondition(bo: any) { bo.conditions.push({ label: '', discount: '' }) }
+function removeCondition(bo: any, i: number) { bo.conditions.splice(i, 1) }
 
 /* ─ File uploads ─ */
 function onBrandLogo(e: Event) {
@@ -518,11 +523,12 @@ function submitOffer() {
 <style scoped>
 /* Toast */
 .toast {
-  position: fixed; top: 24px; right: 24px; z-index: 9999;
+  position: fixed; top: 16px; right: 16px; left: 16px; z-index: 9999;
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
+  padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
+@media (min-width: 480px) { .toast { left: auto; right: 24px; top: 24px; } }
 .toast.success { background: #10b981; color: white; }
 .toast.error { background: #ef4444; color: white; }
 .toast-enter-active, .toast-leave-active { transition: all 0.3s; }
@@ -531,23 +537,28 @@ function submitOffer() {
 /* Stepper */
 .stepper {
   display: flex; align-items: center; gap: 0;
-  background: white; border-radius: 16px; padding: 20px 28px;
-  border: 1px solid #e2e8f0; margin-bottom: 24px;
+  background: white; border-radius: 14px; padding: 14px 16px;
+  border: 1px solid #e2e8f0; margin-bottom: 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  overflow-x: auto;
 }
-.step-item { display: flex; align-items: center; gap: 8px; }
+@media (min-width: 640px) { .stepper { padding: 20px 28px; border-radius: 16px; margin-bottom: 24px; } }
+.step-item { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .step-circle {
-  width: 32px; height: 32px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   border: 2px solid #e2e8f0; background: white; color: #94a3b8;
-  font-size: 13px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: all 0.3s;
 }
-.step-circle.active { border-color: #3b82f6; background: #3b82f6; color: white; box-shadow: 0 0 0 4px rgba(59,130,246,0.2); }
+@media (min-width: 480px) { .step-circle { width: 32px; height: 32px; font-size: 13px; } }
+.step-circle.active { border-color: #3b82f6; background: #3b82f6; color: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
 .step-circle.done { border-color: #10b981; background: #10b981; color: white; }
-.step-label { font-size: 12px; font-weight: 600; color: #94a3b8; white-space: nowrap; }
+.step-label { font-size: 11px; font-weight: 600; color: #94a3b8; white-space: nowrap; display: none; }
+@media (min-width: 480px) { .step-label { display: block; } }
 .step-label.active { color: #0f172a; }
-.step-line { flex: 1; min-width: 32px; height: 2px; background: #e2e8f0; margin: 0 8px; transition: background 0.3s; }
+.step-line { flex: 1; min-width: 20px; height: 2px; background: #e2e8f0; margin: 0 6px; transition: background 0.3s; }
+@media (min-width: 480px) { .step-line { min-width: 32px; margin: 0 8px; } }
 .step-line.done { background: #10b981; }
 
 /* Card */
@@ -559,11 +570,14 @@ function submitOffer() {
 }
 
 /* Step body */
-.step-body { padding: 32px; }
+.step-body { padding: 18px 16px; }
+@media (min-width: 640px) { .step-body { padding: 28px 24px; } }
+@media (min-width: 1024px) { .step-body { padding: 32px; } }
 .step-heading {
-  display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px;
-  padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;
+  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px;
+  padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;
 }
+@media (min-width: 640px) { .step-heading { gap: 16px; margin-bottom: 28px; padding-bottom: 20px; } }
 .step-icon {
   width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
@@ -576,7 +590,8 @@ function submitOffer() {
 .step-sub { font-size: 12px; color: #64748b; margin-top: 3px; }
 
 /* Form grid */
-.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-grid-2 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 540px) { .form-grid-2 { grid-template-columns: 1fr 1fr; gap: 18px; } }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group.form-full { grid-column: 1 / -1; }
 .form-label { font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -632,8 +647,9 @@ function submitOffer() {
 .logo-or { display: flex; align-items: center; gap: 8px; flex: 1; }
 
 /* Banners */
-.banners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.banners-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+.banners-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 480px) { .banners-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .banners-grid { grid-template-columns: repeat(3, 1fr); } }
 .banner-slot { display: flex; flex-direction: column; gap: 8px; }
 .slot-label { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
 .upload-zone {
@@ -721,8 +737,10 @@ function submitOffer() {
 /* Footer nav */
 .step-footer {
   display: flex; align-items: center; gap: 12px;
-  padding: 20px 32px; border-top: 1px solid #f1f5f9; background: #f8fafc;
+  padding: 16px; border-top: 1px solid #f1f5f9; background: #f8fafc;
+  flex-wrap: wrap;
 }
+@media (min-width: 640px) { .step-footer { padding: 20px 32px; flex-wrap: nowrap; } }
 .btn-back {
   padding: 10px 22px; border-radius: 10px; border: 1px solid #e2e8f0;
   background: white; color: #374151; font-size: 13px; font-weight: 600;
@@ -744,5 +762,18 @@ function submitOffer() {
   color: white; font-size: 13px; font-weight: 700; cursor: pointer;
   box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: all 0.2s;
 }
+/* Conditions */
+.conditions-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.form-label-note { font-size: 10px; font-weight: 400; color: #94a3b8; text-transform: none; letter-spacing: 0; }
+.form-hint-line { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.btn-add-cond {
+  flex-shrink: 0; padding: 7px 14px; border-radius: 8px;
+  border: 1.5px dashed #fbbf24; background: #fffbeb; color: #92400e;
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-add-cond:hover { background: #fef3c7; border-color: #f59e0b; }
+.cond-list { display: flex; flex-direction: column; gap: 8px; }
+.cond-row { display: flex; align-items: center; gap: 8px; }
+.no-cond-hint { font-size: 11px; color: #cbd5e1; padding: 10px 0; }
 .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(16,185,129,0.4); }
 </style>
